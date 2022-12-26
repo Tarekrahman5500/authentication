@@ -13,23 +13,24 @@ const middleware1 = async (req, res, next) => {
 const middleware2 = async (req, res, next) => {
 
   console.log(`middleware2: ${req.customProperties}`)
-  //const errObj = new Error('I am an  error')
+  let errObj = null
+   //errObj = new Error('I am an  error')
   req.customProperties = 600
-  next();
+  next(errObj);
 }
 
 const errorHandler = async (err,req, res, next) => {
   if (err) {
-       res.send(`<h1> There an error occurred</h1>`)
-  }
+    console.error(err)
+       res.json({err, info: `<h1> There an error occurred</h1>`})
+  } else next();
 }
 router.use(middleware1)
 router.use(middleware2)
 
-
 router.get('/', (req, res, next)  => {
- /* res.send(`<h1>Hi: ${req.customProperties} hi </h1>`)*/
-  res.send({message: "hi"})
+  res.send(`<h1>Hi: ${req.customProperties}</h1>`)
 });
 
+router.use(errorHandler)
 module.exports = router;
