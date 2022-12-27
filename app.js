@@ -1,14 +1,12 @@
 import express from 'express';
 import path from 'path'
 import passport from 'passport'
-import cookieParser from 'cookie-parser'
-import cookieSession from 'cookie-session'
 import logger from 'morgan'
 import cors from "cors";
 require('dotenv/config')
 import session from 'express-session'
 import { default as connectMongoDBSession} from 'connect-mongodb-session';
-
+import crypto from 'crypto';
 
 // Need to require the entire Passport config module so app.js knows about it
 require('./config/passport');

@@ -1,8 +1,6 @@
 import mongoose from 'mongoose'
 require('dotenv').config();
 
-
-
 const conn = process.env.DB_CONNECTION;
 
 const connection = mongoose.createConnection(conn, {
@@ -19,7 +17,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 
-const User1 = connection.model('User', UserSchema);
+const User = connection.model('User', UserSchema);
 
 // Expose the connection
 module.exports = connection;
